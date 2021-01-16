@@ -1,11 +1,20 @@
 package com.crystaldata.osworks.domain.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
 public class Cliente {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String nome;
 	private String email;
-	private String Telefone;
+
+	@Column(name = "fone")
+	private String telefone;
 	
 	public Cliente() {}
 
@@ -14,7 +23,7 @@ public class Cliente {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		Telefone = telefone;
+		this.telefone = telefone;
 	}
 
 	public Long getId() {
@@ -42,11 +51,11 @@ public class Cliente {
 	}
 
 	public String getTelefone() {
-		return Telefone;
+		return telefone;
 	}
 
 	public void setTelefone(String telefone) {
-		Telefone = telefone;
+		telefone = telefone;
 	}
 
 	@Override
