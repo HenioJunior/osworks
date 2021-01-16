@@ -14,6 +14,7 @@ import com.crystaldata.osworks.domain.model.Cliente;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
@@ -41,12 +42,12 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {
+	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 	
 	@PutMapping("/{clienteId}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId,
+	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId,
 			@RequestBody Cliente cliente) {
 		
 		if(!clienteRepository.existsById(clienteId)) {
