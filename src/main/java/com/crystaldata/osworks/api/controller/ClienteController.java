@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.crystaldata.osworks.domain.repository.ClienteRepository;
+import com.crystaldata.osworks.domain.service.CadastroClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,9 @@ public class ClienteController {
 	
 	@PersistenceContext
 	private EntityManager manager;
+
+	@Autowired
+	private CadastroClienteService cadastroCliente;
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -43,7 +47,7 @@ public class ClienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+		return cadastroCliente.salvar(cliente);
 	}
 	
 	@PutMapping("/{clienteId}")
@@ -53,8 +57,9 @@ public class ClienteController {
 		if(!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 			}
-		cliente = clienteRepository.save(cliente);
-		
+		cliente.setId(clienteId);
+		cliente = cadastroCliente.salvar(cliente);
+
 		return ResponseEntity.ok(cliente);
 	}
 	
@@ -63,7 +68,7 @@ public class ClienteController {
 		if(!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 			}
-		clienteRepository.deleteById(clienteId);
+		cadastroCliente.excluir(clienteId);
 		
 		return ResponseEntity.noContent().build();
 	}
