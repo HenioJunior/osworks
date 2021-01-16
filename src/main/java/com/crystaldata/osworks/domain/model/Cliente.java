@@ -1,7 +1,6 @@
 package com.crystaldata.osworks.domain.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 public class Cliente {
@@ -45,7 +44,7 @@ public class Cliente {
 	}
 
 	public void setTelefone(String telefone) {
-		telefone = telefone;
+		this.telefone = telefone;
 	}
 
 	@Override
