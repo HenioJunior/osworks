@@ -1,4 +1,17 @@
 # osworks
+Query de criação da tebela cliente
+
+create table cliente (
+id bigint not null auto_increment,
+nome varchar(60) not null,
+email varchar(255) not null,
+telefone varchar(20) not null,
+
+primary key (id)
+);
+
+
+
 Query de criação da tabela ordem_servico
 
 create table ordem_servico (
